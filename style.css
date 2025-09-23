@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #222;
+    color: #eee;
+    font-family: 'Press Start 2P', cursive; /* Você pode precisar importar esta fonte ou usar uma genérica */
+}
+
+canvas {
+    border: 5px solid #eee;
+    background-color: #000;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.controls { /* Estilo para a div dos botões */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+button { /* Estilo para os botões */
+    background-color: #4CAF50; /* Cor de fundo verde */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+button:hover {
+    background-color: #45a049;
+}
