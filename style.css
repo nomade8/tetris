@@ -23,7 +23,7 @@ h1 {
 
 .controls { /* Estilo para a div dos botões */
     margin-top: 0px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 button { /* Estilo para os botões */
