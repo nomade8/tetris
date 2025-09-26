@@ -8,7 +8,7 @@ body {
     background-color: #222;
     color: #eee;
     font-family: 'Press Start 2P', cursive; /* Você pode precisar importar esta fonte ou usar uma genérica */
-    overflow: hidden;
+    
 }
 
 canvas {
