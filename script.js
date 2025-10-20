@@ -350,25 +350,34 @@ Piece.prototype.collision = function(x, y, piece) {
     return false;
 }
 
+let isFastDropping = false; // Variável para controlar a queda rápida
+
 // Controlar a peça com as setas do teclado
 document.addEventListener("keydown", CONTROL);
+document.addEventListener("keyup", (event) => {
+    if (event.keyCode == 40) { // Seta para Baixo
+        isFastDropping = false;
+    }
+});
 
 let gamePaused = false; // Variável para controlar o estado de pausa
 
 function CONTROL(event) {
     if (gameOver || gamePaused) return; // Não permite controle se o jogo acabou ou está pausado
 
-    if (event.keyCode == 37) { // Seta Esquerda
+    if (event.keyCode == 37) {
         p.moveLeft();
         dropStart = Date.now();
-    } else if (event.keyCode == 38) { // Seta Para Cima (Rotacionar)
+    } else if (event.keyCode == 38) {
         p.rotate();
         dropStart = Date.now();
-    } else if (event.keyCode == 39) { // Seta Direita
+    } else if (event.keyCode == 39) {
         p.moveRight();
         dropStart = Date.now();
-    } else if (event.keyCode == 40) { // Seta Para Baixo
+    } else if (event.keyCode == 40) {
+        // Ao pressionar para baixo, move a peça e ativa a queda rápida
         p.moveDown();
+        isFastDropping = true;
     }
 }
 
@@ -376,88 +385,55 @@ let dropStart = Date.now();
 let gameOver = false;
 
 function drop() {
-    if (gameOver || gamePaused) return; // Não continua a queda se o jogo acabou ou está pausado
+    if (gameOver || gamePaused) {
+        requestAnimationFrame(drop); // Continua chamando para verificar o estado de pausa/game over
+        return;
+    }
 
     let now = Date.now();
     let delta = now - dropStart;
-    if (delta > dropInterval) { // Usa dropInterval aqui
+    let currentDropInterval = isFastDropping ? 50 : dropInterval; // Usa 50ms para queda rápida
+
+    if (delta > currentDropInterval) {
         p.moveDown();
         dropStart = Date.now();
     }
     requestAnimationFrame(drop); // Chama requestAnimationFrame sempre, mas a execução é controlada por gameOver/gamePaused
 }
 
-// Funções para os botões de controle do jogo (Reiniciar e Pausar)
-const restartButton = document.getElementById('restartButton');
-const pauseButton = document.getElementById('pauseButton');
+// Funções para os botões de toque
+const leftButton = document.getElementById('leftButton');
+const rotateButton = document.getElementById('rotateButton');
+const rightButton = document.getElementById('rightButton');
+const downButton = document.getElementById('downButton');
 
-restartButton.addEventListener('click', restartGame);
-pauseButton.addEventListener('click', togglePauseGame);
-
-// Funções para os botões de controle móvel
-const mobileLeftButton = document.getElementById('mobileLeft');
-const mobileRotateButton = document.getElementById('mobileRotate');
-const mobileRightButton = document.getElementById('mobileRight');
-const mobileDownButton = document.getElementById('mobileDown');
-
-mobileLeftButton.addEventListener('click', () => {
-    if (gameOver || gamePaused) return;
+leftButton.addEventListener('touchstart', (e) => {
+    e.preventDefault(); // Previne o comportamento padrão do toque (ex: scroll)
     p.moveLeft();
     dropStart = Date.now();
 });
 
-mobileRotateButton.addEventListener('click', () => {
-    if (gameOver || gamePaused) return;
+rotateButton.addEventListener('touchstart', (e) => {
+    e.preventDefault();
     p.rotate();
     dropStart = Date.now();
 });
 
-mobileRightButton.addEventListener('click', () => {
-    if (gameOver || gamePaused) return;
+rightButton.addEventListener('touchstart', (e) => {
+    e.preventDefault();
     p.moveRight();
     dropStart = Date.now();
 });
 
-mobileDownButton.addEventListener('click', () => {
-    if (gameOver || gamePaused) return;
+downButton.addEventListener('touchstart', (e) => {
+    e.preventDefault();
     p.moveDown();
+    isFastDropping = true; // Ativa a queda rápida ao tocar e segurar
 });
 
-
-function restartGame() {
-    // Resetar o tabuleiro
-    for (r = 0; r < ROW; r++) {
-        for (c = 0; c < COL; c++) {
-            board[r][c] = VACANT;
-        }
-    }
-    drawBoard();
-
-    // Resetar pontuação e velocidade
-    score = 0;
-    document.getElementById('score').innerHTML = `Score: ${score}`;
-    dropInterval = INITIAL_DROP_INTERVAL;
-    nextSpeedIncreaseScore = SPEED_INCREASE_SCORE_THRESHOLD;
-
-    // Resetar estado do jogo
-    gameOver = false;
-    gamePaused = false;
-    pauseButton.textContent = "Pausar Jogo"; // Garante que o texto do botão esteja correto
-
-    // Gerar nova peça e iniciar a queda
-    p = randomPiece();
-    dropStart = Date.now();
-    drop(); // Reinicia o loop de queda
-}
-
-function togglePauseGame() {
-    gamePaused = !gamePaused;
-    if (gamePaused) {
-        pauseButton.textContent = "Continuar Jogo";
-    } else {
-        pauseButton.textContent = "Pausar Jogo";
-        drop(); // Retoma o loop de queda se não estiver pausado
-    }
-}
+downButton.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    isFastDropping = false; // Desativa a queda rápida ao soltar
+});
 
 drop(); // Inicia o jogo

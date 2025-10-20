@@ -4,11 +4,11 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 90vh;
+    min-height: 100vh;
     background-color: #222;
     color: #eee;
     font-family: 'Press Start 2P', cursive; /* Você pode precisar importar esta fonte ou usar uma genérica */
-    
+    position: relative; /* Necessário para posicionar os controles de toque */
 }
 
 canvas {
@@ -17,32 +17,78 @@ canvas {
 }
 
 h1 {
-    margin-bottom: 0px;
+    margin-bottom: 20px;
     font-size: 2em;
 }
 
-.controls { /* Estilo para a div dos botões */
-    margin-top: 0px;
-    margin-bottom: 0px;
+.touch-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px; /* Altura da área de toque */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas para esquerda, rotação, direita */
+    grid-template-rows: repeat(2, 1fr); /* 2 linhas para cima/baixo */
+    gap: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 10; /* Para garantir que os botões fiquem acima do canvas */
 }
 
-button { /* Estilo para os botões */
-    background-color: #4CAF50; /* Cor de fundo verde */
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+.touch-button {
+    background-color: rgba(255, 255, 255, 0.1); /* Transparente com um pouco de opacidade para ser visível */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    border-radius: 8px;
-    font-family: 'Press Start 2P', cursive;
+    user-select: none; /* Evita seleção de texto em dispositivos móveis */
+    -webkit-tap-highlight-color: transparent; /* Remove o destaque de toque padrão */
 }
 
-button:hover {
-    background-color: #45a049;
+#leftButton {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+}
+
+#rotateButton {
+    grid-column: 2;
+    grid-row: 1;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+}
+
+#rightButton {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+}
+
+#downButton {
+    grid-column: 2;
+    grid-row: 2;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+}
+
+/* Removendo estilos dos botões antigos, se existirem */
+.controls,
+button {
+    display: none; /* Esconde os botões antigos */
 }
 
 .mobile-controls { /* Estilo para a div dos controles móveis */
