@@ -16,6 +16,12 @@ body {
     }
 }
 
+@media (min-width: 769px) {
+    body {
+        overflow: hidden;
+    }
+}
+
 .game-wrapper {
     display: flex;
     flex-direction: column;
