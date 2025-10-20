@@ -352,6 +352,43 @@ Piece.prototype.collision = function(x, y, piece) {
 
 let isFastDropping = false; // Variável para controlar a queda rápida
 
+// Função para detectar se é um dispositivo móvel
+function isMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+}
+
+// Obter referências aos elementos de controle
+const touchControls = document.querySelector('.touch-controls');
+const pcControls = document.querySelector('.pc-controls');
+const restartButton = document.getElementById('restartButton');
+const pauseButton = document.getElementById('pauseButton');
+
+// Os controles de PC devem estar sempre visíveis
+pcControls.style.display = 'flex';
+
+// Exibir os controles apropriados com base no dispositivo
+if (isMobileDevice()) {
+    touchControls.style.display = 'grid'; // Mostrar controles de toque
+} else {
+    touchControls.style.display = 'none'; // Esconder controles de toque
+}
+
+// Event Listeners para os botões de PC
+restartButton.addEventListener('click', () => {
+    location.reload(); // Recarrega a página para reiniciar o jogo
+});
+
+pauseButton.addEventListener('click', () => {
+    gamePaused = !gamePaused;
+    if (gamePaused) {
+        pauseButton.textContent = 'Continuar Jogo';
+    } else {
+        pauseButton.textContent = 'Pausar Jogo';
+        dropStart = Date.now(); // Reseta o tempo para evitar queda instantânea
+        drop(); // Reinicia o loop do jogo se estiver pausado
+    }
+});
+
 // Controlar a peça com as setas do teclado
 document.addEventListener("keydown", CONTROL);
 document.addEventListener("keyup", (event) => {
