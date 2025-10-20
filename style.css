@@ -12,7 +12,7 @@ body {
 
 @media (max-width: 768px) {
     body {
-        padding-bottom: 10px; /* Adiciona espaço para os controles de toque */
+        padding-bottom: 140px; /* Adiciona espaço para os controles de toque */
     }
 }
 
@@ -42,12 +42,6 @@ canvas {
     border: 5px solid #eee;
     background-color: #000;
     margin-left: 5px; /* Move o grid para a direita */
-}
-
-@media (max-width: 768px) {
-    canvas {
-        margin-top: -50px; /* Move o grid 50px para cima em dispositivos móveis */
-    }
 }
 
 h1 {
