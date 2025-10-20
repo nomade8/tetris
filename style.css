@@ -4,10 +4,11 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    min-height: 90vh;
     background-color: #222;
     color: #eee;
     font-family: 'Press Start 2P', cursive; /* Você pode precisar importar esta fonte ou usar uma genérica */
+    
 }
 
 canvas {
@@ -16,13 +17,13 @@ canvas {
 }
 
 h1 {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     font-size: 2em;
 }
 
 .controls { /* Estilo para a div dos botões */
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 button { /* Estilo para os botões */
