@@ -13,7 +13,6 @@ body {
 @media (max-width: 768px) {
     body {
         padding-bottom: 10px; /* Adiciona espaço para os controles de toque */
-        overflow: hidden; /* Remove o scroll em dispositivos móveis */
     }
 }
 

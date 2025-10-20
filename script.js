@@ -380,10 +380,7 @@ restartButton.addEventListener('click', () => {
 
 pauseButton.addEventListener('click', () => {
     gamePaused = !gamePaused;
-    if (gamePaused) {
-        pauseButton.textContent = 'Continuar Jogo';
-    } else {
-        pauseButton.textContent = 'Pausar Jogo';
+    if (!gamePaused) {
         dropStart = Date.now(); // Reseta o tempo para evitar queda instantânea
         drop(); // Reinicia o loop do jogo se estiver pausado
     }
