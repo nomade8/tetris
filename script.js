@@ -358,16 +358,16 @@ let gamePaused = false; // Variável para controlar o estado de pausa
 function CONTROL(event) {
     if (gameOver || gamePaused) return; // Não permite controle se o jogo acabou ou está pausado
 
-    if (event.keyCode == 37) {
+    if (event.keyCode == 37) { // Seta Esquerda
         p.moveLeft();
         dropStart = Date.now();
-    } else if (event.keyCode == 38) {
+    } else if (event.keyCode == 38) { // Seta Para Cima (Rotacionar)
         p.rotate();
         dropStart = Date.now();
-    } else if (event.keyCode == 39) {
+    } else if (event.keyCode == 39) { // Seta Direita
         p.moveRight();
         dropStart = Date.now();
-    } else if (event.keyCode == 40) {
+    } else if (event.keyCode == 40) { // Seta Para Baixo
         p.moveDown();
     }
 }
@@ -387,12 +387,42 @@ function drop() {
     requestAnimationFrame(drop); // Chama requestAnimationFrame sempre, mas a execução é controlada por gameOver/gamePaused
 }
 
-// Funções para os botões
+// Funções para os botões de controle do jogo (Reiniciar e Pausar)
 const restartButton = document.getElementById('restartButton');
 const pauseButton = document.getElementById('pauseButton');
 
 restartButton.addEventListener('click', restartGame);
 pauseButton.addEventListener('click', togglePauseGame);
+
+// Funções para os botões de controle móvel
+const mobileLeftButton = document.getElementById('mobileLeft');
+const mobileRotateButton = document.getElementById('mobileRotate');
+const mobileRightButton = document.getElementById('mobileRight');
+const mobileDownButton = document.getElementById('mobileDown');
+
+mobileLeftButton.addEventListener('click', () => {
+    if (gameOver || gamePaused) return;
+    p.moveLeft();
+    dropStart = Date.now();
+});
+
+mobileRotateButton.addEventListener('click', () => {
+    if (gameOver || gamePaused) return;
+    p.rotate();
+    dropStart = Date.now();
+});
+
+mobileRightButton.addEventListener('click', () => {
+    if (gameOver || gamePaused) return;
+    p.moveRight();
+    dropStart = Date.now();
+});
+
+mobileDownButton.addEventListener('click', () => {
+    if (gameOver || gamePaused) return;
+    p.moveDown();
+});
+
 
 function restartGame() {
     // Resetar o tabuleiro

@@ -9,11 +9,19 @@
 <body>
     <h1>Tetris</h1>
     <div id="score">Score: 0</div>
-    <div class="controls"> <!-- Adicione esta div para os botões -->
+    <div class="controls">
         <button id="restartButton">Reiniciar Jogo</button>
         <button id="pauseButton">Pausar Jogo</button>
     </div>
-    <canvas id="tetrisCanvas" width="250" height="500"></canvas> <!-- Largura e altura ajustadas -->
+    <canvas id="tetrisCanvas" width="250" height="500"></canvas>
+
+    <div class="mobile-controls"> <!-- Nova seção para controles móveis -->
+        <button id="mobileLeft">◀️</button>
+        <button id="mobileRotate">⬆️</button>
+        <button id="mobileRight">▶️</button>
+        <button id="mobileDown">⬇️</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

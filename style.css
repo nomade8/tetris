@@ -43,3 +43,42 @@ button { /* Estilo para os botões */
 button:hover {
     background-color: #45a049;
 }
+
+.mobile-controls { /* Estilo para a div dos controles móveis */
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas para os botões */
+    grid-template-rows: repeat(2, 1fr); /* 2 linhas */
+    gap: 10px;
+    width: 250px; /* Mesma largura do canvas para alinhamento */
+}
+
+.mobile-controls button {
+    background-color: rgba(255, 255, 255, 0.1); /* Quase transparente */
+    color: #eee;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 2em;
+    padding: 10px;
+    border-radius: 5px;
+    grid-column: span 1; /* Cada botão ocupa 1 coluna por padrão */
+}
+
+#mobileLeft {
+    grid-column: 1 / 2; /* Coluna 1 */
+    grid-row: 2 / 3; /* Linha 2 */
+}
+
+#mobileRotate {
+    grid-column: 2 / 3; /* Coluna 2 */
+    grid-row: 1 / 2; /* Linha 1 */
+}
+
+#mobileRight {
+    grid-column: 3 / 4; /* Coluna 3 */
+    grid-row: 2 / 3; /* Linha 2 */
+}
+
+#mobileDown {
+    grid-column: 2 / 3; /* Coluna 2 */
+    grid-row: 2 / 3; /* Linha 2 */
+}
