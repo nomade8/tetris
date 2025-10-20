@@ -10,21 +10,18 @@ body {
     position: relative; /* Necessário para posicionar os controles de toque */
 }
 
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 10px; /* Adiciona espaço para os controles de toque */
+        overflow: hidden; /* Remove o scroll em dispositivos móveis */
+    }
+}
+
 .game-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-}
-
-.game-content-wrapper {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
 }
 
 .main-game-area {
@@ -48,15 +45,25 @@ canvas {
     margin-left: 5px; /* Move o grid para a direita */
 }
 
+@media (max-width: 768px) {
+    canvas {
+        margin-top: -50px; /* Move o grid 50px para cima em dispositivos móveis */
+    }
+}
+
 h1 {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-size: 2em;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 #score {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 1;
 }
 
 .touch-controls {
